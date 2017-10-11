@@ -1,0 +1,6 @@
+AAPL
+AMD
+ATVI
+BA
+BRK.B
+TTWO

@@ -1,0 +1,45 @@
+body {
+  background-color: #555;
+  color: #fff;
+  font-family: "Avenir Next", sans-serif;
+  padding: 1em;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.box {
+  background-color: gray;
+  border: 2px solid dimgray;
+  border-radius: 10px;
+  font-size: 200%;
+  text-align: center;
+  transition: filter .25s ease;
+}
+
+.box-content {
+  left: 50%;
+  padding: 1rem 0;
+  position: relative;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.up {
+  background-color: seagreen;
+  border-color: green;
+}
+
+.down {
+  background-color: crimson;
+  border-color: firebrick;
+}
+
+.stocktitle {
+  font-weight: bold;
+}
