@@ -1,0 +1,1 @@
+const urlStock = "stocks.txt";

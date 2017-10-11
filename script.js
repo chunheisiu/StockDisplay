@@ -10,7 +10,6 @@ function init() {
 
 function loadStock() {
   var xmlhttp = new XMLHttpRequest();
-  var url = "stocks.txt";
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       stocks = this.responseText.split('\n');
@@ -20,7 +19,7 @@ function loadStock() {
       }
     }
   };
-  xmlhttp.open("GET", url, true);
+  xmlhttp.open("GET", urlStock, true);
   xmlhttp.send();
 }
 
