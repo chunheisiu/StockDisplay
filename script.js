@@ -1,5 +1,6 @@
 const urlPre = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=";
 const urlSuf = "&apikey=7OSKDO9RIHMITDRM";
+const reloadTime = 20000;
 
 var stocks;
 
@@ -29,7 +30,7 @@ function reload() {
       requestStock(stock);
     }
     reload();
-  }, 30000);
+  }, reloadTime);
 }
 
 function requestStock(stock) {
