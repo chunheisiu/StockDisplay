@@ -13,7 +13,6 @@ function loadStock() {
   var stockList = getQueryVariable("symbols");
   if (stockList != null) {
     stocks = stockList.split(',');
-    console.log(stocks);
     for (var stock of stocks) {
       createTile(stock);
       requestStock(stock);
