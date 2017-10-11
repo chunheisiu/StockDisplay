@@ -30,7 +30,7 @@ function reload() {
       requestStock(stock);
     }
     reload();
-  }, 50000);
+  }, 30000);
 }
 
 function requestStock(stock) {
