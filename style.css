@@ -6,6 +6,10 @@ body {
   text-align: center;
 }
 
+a {
+  color: #fff;
+}
+
 .container {
   display: grid;
   grid-column-gap: 10px;
@@ -42,4 +46,15 @@ body {
 
 .stocktitle {
   font-weight: bold;
+}
+
+.author {
+  border-radius: 10px;
+  border: 2px solid dimgray;
+  bottom: 5vh;
+  left: 50%;
+  line-height: 10%;
+  padding: 0 1em;
+  position: fixed;
+  transform: translate(-50%, 0);
 }
