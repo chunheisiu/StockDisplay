@@ -58,22 +58,29 @@ a {
   transform: translate(-50%, -50%);
 }
 
-.about {
+.about, .star {
   cursor: pointer;
   filter: opacity(0.5);
-  position: absolute;
-  right: 5vh;
-  top: 2.5vh;
   transition: filter .25s ease;
 }
 
-.about:hover {
+.about:hover, .star:hover {
   filter: opacity(1);
+}
+
+.star {
+  margin-right: .5em;
+}
+
+.toolbar {
+  text-align: right;
+  margin: .5em 1em 0 0;
 }
 
 #overlay {
   line-height: 10%;
-  background-color: rgba(0,0,0,0.75); /* Black background with opacity */
+  font-size: 150%;
+  background-color: rgba(0,0,0,0.85); /* Black background with opacity */
   position: fixed; /* Sit on top of the page content */
   display: none; /* Hidden by default */
   width: 100%; /* Full width (cover the whole page) */
