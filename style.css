@@ -49,12 +49,13 @@ a {
 }
 
 .author {
-  border-radius: 10px;
+  background-color: gray;
   border: 2px solid dimgray;
+  border-radius: 10px;
   bottom: 5vh;
   left: 50%;
   line-height: 10%;
-  padding: 0 1em;
+  padding: 0 2em;
   position: fixed;
   transform: translate(-50%, 0);
 }
