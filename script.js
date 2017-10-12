@@ -139,4 +139,12 @@ function getQueryVariable(variable) {
     return null;
 }
 
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
+
 init();

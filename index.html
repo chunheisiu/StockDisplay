@@ -6,11 +6,14 @@
   <script type="text/javascript" src="default.js"></script>
 </head>
 <body>
+  <p><img src="about.svg" width="30em" class="about" onclick="on();"></p>
   <div class="container" id="container"></div>
-  <div class="author">
-    <h4>StockDisplay v0.1</h4>
-    <h5>A project by <a href="http://chunheisiu.com" target="_blank">@chunheisiu</a>.</h5>
-    <h5>Stock data powered by <a href="https://www.alphavantage.co" target="_blank"><img src="alphaadvantage.svg" width="130em"></a> .</h5>
+  <div id="overlay" onclick="off();">
+    <div class="author">
+      <h4>StockDisplay v0.1</h4>
+      <h5>A project by <a href="http://chunheisiu.com" target="_blank">@chunheisiu</a>.</h5>
+      <h5>Stock data powered by <a href="https://www.alphavantage.co" target="_blank"><img src="alphaadvantage.svg" width="130em"></a> .</h5>
+    </div>
   </div>
   <script type="text/javascript" src="script.js"></script>
 </body>
