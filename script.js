@@ -92,7 +92,7 @@ function createTile(stock) {
   var html;
   html = "<div class='box-content'>";
   html += "<span class='stocktitle'>" + stock + "</span><br>";
-  html += "<span class='stockprice'>$––.––</span><br>";
+  html += "<span class='stockprice'>––.––</span><br>";
   html += "<span class='stockpricechg'>––.–– (––.––%)</span><br>";
   html += "</div>";
   div.innerHTML = html;
@@ -116,7 +116,7 @@ function updateTile(stockArr) {
   var html;
   html = "<div class='box-content'>";
   html += "<span class='stocktitle'>" + stockArr[0] + "</span><br>";
-  html += "<span class='stockprice'>$" + stockArr[1].toFixed(2) + "</span><br>";
+  html += "<span class='stockprice'>" + stockArr[1].toFixed(2) + "</span><br>";
   html += "<span class='stockpricechg'>" + sign + stockArr[2].toFixed(2) + " (" + stockArr[3].toFixed(2) + "%)</span><br>";
   html += "</div>";
   div.innerHTML = html;
