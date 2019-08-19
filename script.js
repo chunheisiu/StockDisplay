@@ -13,6 +13,7 @@ function loadStock() {
   var stockList = getQueryVariable("symbols");
   if (stockList != null) {
     stocks = stockList.split(',');
+    stocks.sort();
     for (var stock of stocks) {
       createTile(stock);
       requestStock(stock);
@@ -28,6 +29,7 @@ function loadStockWithTxt() {
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       stocks = this.responseText.split('\n');
+      stocks.sort();
       for (var stock of stocks) {
         createTile(stock);
         requestStock(stock);
@@ -137,6 +139,18 @@ function getQueryVariable(variable) {
         }
     }
     return null;
+}
+
+function add() {
+  var symb = document.getElementById("symb").value;
+
+  if (symb != "") {
+    if (!getQueryVariable("symbols")) {
+      window.location.replace("../?symbols=" + symb)
+    } else {
+      window.location.replace(window.location + "," + symb)
+    }
+  }
 }
 
 function on() {

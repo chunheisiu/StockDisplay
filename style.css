@@ -15,7 +15,7 @@ a {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 2vh;
+  margin-top: 5em;
 }
 
 .box {
@@ -57,13 +57,44 @@ a {
   transform: translate(-50%, -50%);
 }
 
-.about, .star {
+.search-bar {
+    position: absolute;
+    left: 2em;
+    margin-top: .5em;
+}
+
+.text-box {
+    font-size: 100%;
+    font-family: "Avenir Next", sans-serif;
+    color: #fff;
+    display: inline-block;
+    border-radius: 1em;
+    border: none;
+    background-color: #444;
+    width: 12em;
+    height: 30px;
+    padding: 0 1em;
+    margin: 0 .5em 0 0;
+    vertical-align: 30%;
+}
+
+.dropdown {
+  text-decoration: none;
+}
+
+.btn {
+    position: absolute;
+    right: 2em;
+    margin-top: .5em;
+}
+
+.about, .star, .add {
   cursor: pointer;
   filter: opacity(0.5);
   transition: filter .25s ease;
 }
 
-.about:hover, .star:hover {
+.about:hover, .star:hover, .add:hover {
   filter: opacity(1);
 }
 
@@ -72,8 +103,7 @@ a {
 }
 
 .toolbar {
-  text-align: right;
-  margin: .5em 1em 0 0;
+  text-align: left;
 }
 
 #overlay {

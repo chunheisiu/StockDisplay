@@ -6,14 +6,22 @@
   <script type="text/javascript" src="default.js"></script>
 </head>
 <body>
-  <p class="toolbar">
-    <!--<img src="star.svg" width="30em" class="star" onclick="window.external.AddFavorite(location.href, document.title);">-->
-    <img src="about.svg" width="30em" class="about" onclick="on();">
-  </p>
+  <div class="toolbar">
+    <div class="search-bar">
+      <label>
+        <input type="text" class="text-box" id="symb" placeholder="Ticker Symbol">
+      </label>
+      <img src="add.svg" width="25em" class="add" onclick="add();" alt="">
+    </div>
+    <div class="btn">
+      <!--<img src="star.svg" width="30em" class="star" onclick="window.external.AddFavorite(location.href, document.title);">-->
+      <img src="about.svg" width="30em" class="about" onclick="on();" alt="">
+    </div>
+  </div>
   <div class="container" id="container"></div>
   <div id="overlay" onclick="off();">
     <div class="author">
-      <h4>StockDisplay v0.1</h4>
+      <h4>StockDisplay v0.2</h4>
       <h5>A project by <a href="http://chunheisiu.com" target="_blank">@chunheisiu</a>.</h5>
       <h5>Stock data powered by <a href="https://www.alphavantage.co" target="_blank"><img src="alphavantage.svg" width="175em"></a> .</h5>
     </div>
