@@ -5,7 +5,7 @@ This repository contains the source files for StockDisplay, a client-side only w
 ![Screenshot](screenshots/screenshot.png)
 
 ### Instructions
-To add a stock that you wish to display in the dashboard, enter its ticker symbol in the text box and click the "Plus" sign. Alternatively, supplied the list of ticker symbols, comma-seperated, in the URL in the following format, with the symbols 
+To add a stock that you wish to display in the dashboard, enter its ticker symbol in the text box and click the "Plus" sign. Alternatively, supply the list of ticker symbols, comma-separated, in the URL in the following format:
 
 `https://stockdisplay.chunheisiu.com/?symbols=<symb1>,<symb2>...`
 
