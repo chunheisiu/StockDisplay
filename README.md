@@ -10,3 +10,5 @@ To add a stock that you wish to display in the dashboard, enter its ticker symbo
 `https://stockdisplay.chunheisiu.com/?symbols=<symb1>,<symb2>...`
 
 To preserve the list of currently displayed stocks, simply bookmark the page in your browser.
+
+Stock data is powered by [Alpha Vantage](https://www.alphavantage.co). Prices displayed are delayed quotes.
