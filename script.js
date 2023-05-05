@@ -1,140 +1,139 @@
-const urlPre = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=";
+const urlPre = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=";
 const urlSuf = "&apikey=7OSKDO9RIHMITDRM";
 const reloadTime = 20000;
 
-var stocks;
+let stocks;
 
 function init() {
-  loadStock();
-  reload();
+    loadStock();
+    reload();
 }
 
 function loadStock() {
-  var stockList = getQueryVariable("symbols");
-  if (stockList != null) {
-    stocks = stockList.split(',');
-    stocks.sort();
-    for (var stock of stocks) {
-      createTile(stock);
-      requestStock(stock);
+    const stockList = getQueryVariable("symbols");
+    if (stockList != null) {
+        stocks = stockList.split(',');
+        stocks.sort();
+        for (const stock of stocks) {
+            createTile(stock);
+            requestStock(stock);
+        }
+    } else {
+        // Testing txt doc fallback
+        loadStockWithTxt();
     }
-  } else {
-    // Testing txt doc fallback
-    loadStockWithTxt();
-  }
 }
 
 function loadStockWithTxt() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      stocks = this.responseText.split('\n');
-      stocks.sort();
-      for (var stock of stocks) {
-        createTile(stock);
-        requestStock(stock);
-      }
-    }
-  };
-  xmlhttp.open("GET", urlStock, true);
-  xmlhttp.send();
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            stocks = this.responseText.split('\n');
+            stocks.sort();
+            for (const stock of stocks) {
+                createTile(stock);
+                requestStock(stock);
+            }
+        }
+    };
+    xmlHttp.open("GET", urlStock, true);
+    xmlHttp.send();
 }
 
 function reload() {
-  setTimeout(function() {
-    for (var stock of stocks) {
-      requestStock(stock);
-    }
-    reload();
-  }, reloadTime);
+    setTimeout(function () {
+        for (const stock of stocks) {
+            requestStock(stock);
+        }
+        reload();
+    }, reloadTime);
 }
 
 function requestStock(stock) {
-  var xmlhttp = new XMLHttpRequest();
-  var url = urlPre + stock + urlSuf;
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var response = this.responseText;
-      var stockObj = parseJSONReponse(response);
+    const xmlHttp = new XMLHttpRequest();
+    const url = urlPre + stock + urlSuf;
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = this.responseText;
+            const stockObj = parseJSONResponse(response);
 
-      try {
-        var stockArr = parseStock(stockObj);
-        updateTile(stockArr);
-      } catch (e) {
-        requestStock(stock);
-      }
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+            try {
+                const stockArr = parseStock(stockObj);
+                updateTile(stockArr);
+            } catch (e) {
+                requestStock(stock);
+            }
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
 }
 
-function parseJSONReponse(response) {
-  return JSON.parse(response);
+function parseJSONResponse(response) {
+    return JSON.parse(response);
 }
 
 function parseStock(stockObj) {
-  var stockName = stockObj["Meta Data"]["2. Symbol"];
-  var stockData = stockObj["Time Series (Daily)"];
-  var dates = Object.keys(stockData).sort();
-  var today = stockData[dates[99]];
-  var previous = stockData[dates[98]];
-  var prevClose = parseFloat(previous["4. close"]);
-  var todayClose = parseFloat(today["4. close"]);
-  var change = todayClose - prevClose;
-  var percentage = change / prevClose * 100;
-  var resultArr = [stockName, todayClose, change, percentage];
-  return resultArr;
+    const stockName = stockObj["Meta Data"]["2. Symbol"];
+    const stockData = stockObj["Time Series (Daily)"];
+    const dates = Object.keys(stockData).sort();
+    const today = stockData[dates[99]];
+    const previous = stockData[dates[98]];
+    const prevClose = parseFloat(previous["4. close"]);
+    const todayClose = parseFloat(today["4. close"]);
+    const change = todayClose - prevClose;
+    const percentage = change / prevClose * 100;
+    return [stockName, todayClose, change, percentage];
 }
 
 function createTile(stock) {
-  var div = document.createElement("div");
-  div.setAttribute("class", "box");
-  div.setAttribute("id", stock);
-  var html;
-  html = "<div class='box-content'>";
-  html += "<span class='stocktitle'>" + stock + "</span><br>";
-  html += "<span class='stockprice'>––.––</span><br>";
-  html += "<span class='stockpricechg'>––.–– (––.––%)</span><br>";
-  html += "</div>";
-  div.innerHTML = html;
-  document.getElementById("container").appendChild(div);
+    const div = document.createElement("div");
+    div.setAttribute("class", "box");
+    div.setAttribute("id", stock);
+    let html;
+    html = "<div class='box-content'>";
+    html += "<span class='stock-title'>" + stock + "</span><br>";
+    html += "<span class='stock-price'>––.––</span><br>";
+    html += "<span class='stock-price-chg'>––.–– (––.––%)</span><br>";
+    html += "</div>";
+    div.innerHTML = html;
+    document.getElementById("container").appendChild(div);
 }
 
 function updateTile(stockArr) {
-  var tileClass = "";
-  var sign = "";
+    let tileClass = "";
+    let sign = "";
 
-  if (stockArr[2] > 0) {
-    tileClass = " up";
-    sign = "+";
-  } else if (stockArr[2] < 0){
-    tileClass = " down"
-  };
+    if (stockArr[2] > 0) {
+        tileClass = " up";
+        sign = "+";
+    } else if (stockArr[2] < 0) {
+        tileClass = " down"
+    }
 
-  var div = document.getElementById(stockArr[0]);
-  div.setAttribute("class", "box" + tileClass);
+    const div = document.getElementById(stockArr[0]);
+    div.setAttribute("class", "box" + tileClass);
 
-  var html;
-  html = "<div class='box-content'>";
-  html += "<span class='stocktitle'>" + stockArr[0] + "</span><br>";
-  html += "<span class='stockprice'>" + stockArr[1].toFixed(2) + "</span><br>";
-  html += "<span class='stockpricechg'>" + sign + stockArr[2].toFixed(2) + " (" + stockArr[3].toFixed(2) + "%)</span><br>";
-  html += "</div>";
-  div.innerHTML = html;
+    let html;
+    html = "<div class='box-content'>";
+    html += "<span class='stock-title'>" + stockArr[0] + "</span><br>";
+    html += "<span class='stock-price'>" + stockArr[1].toFixed(2) + "</span><br>";
+    html += "<span class='stock-price-chg'>" + sign + stockArr[2].toFixed(2) + " (" + stockArr[3].toFixed(2) + "%)</span><br>";
+    html += "</div>";
+    div.innerHTML = html;
 
-  div.setAttribute("style", "filter: brightness(1.5);");
-  setTimeout(function() {
-    div.removeAttribute("style");
-  }, 500)
+    div.setAttribute("style", "filter: brightness(1.5);");
+    setTimeout(function () {
+        div.removeAttribute("style");
+    }, 500)
 }
 
 function getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split('&');
-    for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split('=');
-        if (decodeURIComponent(pair[0]) == variable) {
+    const query = window.location.search.substring(1);
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) === variable) {
             return decodeURIComponent(pair[1]);
         }
     }
@@ -142,15 +141,15 @@ function getQueryVariable(variable) {
 }
 
 function add() {
-  var symb = document.getElementById("symb").value;
+    const symbol = document.getElementById("symbol").value;
 
-  if (symb != "") {
-    if (!getQueryVariable("symbols")) {
-      window.location.replace("../?symbols=" + symb)
-    } else {
-      window.location.replace(window.location + "," + symb)
+    if (symbol !== "") {
+        if (!getQueryVariable("symbols")) {
+            window.location.replace("../?symbols=" + symbol)
+        } else {
+            window.location.replace(window.location + "," + symbol)
+        }
     }
-  }
 }
 
 function on() {
